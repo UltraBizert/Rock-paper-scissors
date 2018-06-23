@@ -36,6 +36,7 @@ Temp/
 Obj/
 UnityGenerated/
 Library/
+InitTestScene*
  
 # ----[ Visual Studio / MonoDevelop generated ]------- #
  
