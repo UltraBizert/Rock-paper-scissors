@@ -157,7 +157,7 @@ MonoBehaviour:
   PaperSprite: {fileID: 21300000, guid: 141b0facbbb40df43bbcf1cac04db87f, type: 3}
   ScissorsSprite: {fileID: 21300000, guid: 64ad659a96e8b1d469ae3573c6caad22, type: 3}
   DefaultSprite: {fileID: 21300000, guid: 69382cda6bcbb164c9a98dff1314f094, type: 3}
-  ShowOppenentChoiceTime: 2
+  ShowOppenentChoiceTime: 1
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
