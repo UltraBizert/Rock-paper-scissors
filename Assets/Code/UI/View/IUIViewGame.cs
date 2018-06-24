@@ -9,5 +9,6 @@ namespace Code.UI.View
         void SetOpponentChoice(Sprite sprite);
         void ShowRoundResult(string result);
         void StartNewRound();
+        void OpenSettings();
     }
 }

@@ -11,3 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d365b4c72a97dde428d9fce50f31d6b7, type: 3}
   m_Name: Opponent AI
   m_EditorClassIdentifier: 
+  LevelOfDishonesty: 0.5

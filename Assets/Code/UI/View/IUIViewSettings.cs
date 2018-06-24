@@ -2,7 +2,9 @@
 {
     public interface IUIViewSettings
     {
-        void SelectAIType();
-        void SelectAIWinRate();
+        void SelectAIType(bool honest);
+        void SelectAIDishonestyLevel(float dishonestyLevel);
+        void CloseSettingsPanel();
+        void OpenSettingsPanel();
     }
 }

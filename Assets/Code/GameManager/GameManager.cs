@@ -1,4 +1,5 @@
-﻿using Code.Round;
+﻿using Code.AI;
+using Code.Round;
 using Code.UI.View;
 using UnityEngine;
 
@@ -20,18 +21,52 @@ namespace Code.GameManager
     
     public class GameManager : MonoBehaviour, IGameManager
     {
+        public OpponentAI AI;
+        
         private int playerScore;
         private int opponentScore;
 
         private IUIViewGame gameView;
         private IUIViewSettings settingsView;
         private IRoundController roundController;
-    
+        private bool playWithHonestAI = true;
+        
         void Awake()
         {
-            gameView = GetComponent<IUIViewGame>();
-            settingsView = GetComponent<IUIViewSettings>();
-            roundController = GetComponent<IRoundController>();
+            gameView = FindObjectOfType<UIViewGame>();
+            settingsView = FindObjectOfType<UIViewSettings>();
+            roundController = FindObjectOfType<RoundController>();
+        }
+
+        void Start()
+        {
+            settingsView.CloseSettingsPanel();
+            roundController.StartNewRound();
+        }
+
+        public void ActivateHonestAI(bool playWithHonest)
+        {
+            playWithHonestAI = playWithHonest;
+        }
+
+        public void SetOpponentAIDishonesty(float levelOfDishonesty)
+        {
+            AI.LevelOfDishonesty = levelOfDishonesty;
+        }
+
+        public void OpenSettings()
+        {
+            settingsView.OpenSettingsPanel();
+        }
+
+        public Shape GetOpponentShape(Shape playerShape)
+        {
+            if (playWithHonestAI)
+            {
+                return AI.GetRandomMove();
+            }
+            
+            return AI.GetShapeWithPrediction(playerShape);
         }
         
         public RoundResult ProceedRound(Shape playerChoice, Shape oppenentChoice)

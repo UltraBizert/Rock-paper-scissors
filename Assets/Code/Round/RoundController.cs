@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using Code.AI;
+﻿using System.Collections;
 using Code.GameManager;
 using Code.UI.View;
 using UnityEngine;
@@ -9,8 +7,6 @@ namespace Code.Round
 {
     public class RoundController : MonoBehaviour, IRoundController
     {
-        public OpponentAI AI;
-
         public Sprite RockSprite;
         public Sprite PaperSprite;
         public Sprite ScissorsSprite;
@@ -21,6 +17,7 @@ namespace Code.Round
         private IGameManager gameManager;
         private IUIViewGame gameView;
         private WaitForSeconds waitForShowOpponentChoice;
+        private bool RoundInActivePhase;
 
         void Awake()
         {
@@ -28,22 +25,23 @@ namespace Code.Round
             gameView = FindObjectOfType<UIViewGame>();
             waitForShowOpponentChoice = new WaitForSeconds(ShowOppenentChoiceTime);
         }
-
-        void Start()
-        {
-            StartNewRound();
-        }
         
         public void StartNewRound()
         {
             gameView.SetOpponentChoice(DefaultSprite);
             gameView.SetPlayerChoice(DefaultSprite);
             gameView.StartNewRound();
+            RoundInActivePhase = true;
         }
 
         public void SetPlayerChoice(Shape playerShape)
         {
-            Shape opponentShape = AI.GetRandomMove();
+            if (!RoundInActivePhase)
+                return;
+            
+            RoundInActivePhase = false;
+            
+            Shape opponentShape = gameManager.GetOpponentShape(playerShape);
             RoundResult result = gameManager.ProceedRound(playerShape, opponentShape);
 
             StartCoroutine(RoundRoutine(playerShape, opponentShape, result));

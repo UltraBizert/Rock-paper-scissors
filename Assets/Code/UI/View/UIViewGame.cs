@@ -16,10 +16,12 @@ namespace Code.UI.View
         public Text RoundResultText;
 
         private IRoundController roundController;
+        private IGameManager gameManager;
 
         void Awake()
         {
             roundController = FindObjectOfType<RoundController>();
+            gameManager = FindObjectOfType<GameManager.GameManager>();
         }
         
         public void SelectRock()
@@ -69,6 +71,11 @@ namespace Code.UI.View
         public void StartNewRound()
         {
             RoundResultPanel.SetActive(false);
+        }
+
+        public void OpenSettings()
+        {
+            gameManager.OpenSettings();
         }
     }
 }
